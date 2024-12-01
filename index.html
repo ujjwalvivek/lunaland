@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+        <title>Lunaland</title>
+        <style>
+            :root {
+                color-scheme: dark;
+                --ink: #f1dcd3;
+                --muted: #967f99;
+                --edge: #665064;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                width: 100%;
+                min-height: 100%;
+            }
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                background:
+                    radial-gradient(
+                        circle at 50% 34%,
+                        #493244 0,
+                        #242034 46%,
+                        #111221 82%
+                    ),
+                    #111221;
+                color: var(--ink);
+                font-family: "OCR A Std", "Lucida Console", monospace;
+            }
+            .shell {
+                width: min(calc(100vw - 48px), 1280px);
+                display: grid;
+                gap: 12px;
+            }
+            .frame {
+                position: relative;
+                aspect-ratio: 16 / 9;
+                overflow: hidden;
+                border: 1px solid var(--edge);
+                background: #000;
+                border-radius: 0;
+                box-shadow:
+                    7px 7px 0 #0b0912,
+                    0 0 0 1px #30253a;
+            }
+            canvas {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            .status {
+                position: absolute;
+                inset: 0;
+                display: grid;
+                place-items: center;
+                background: #020607;
+                color: var(--muted);
+                letter-spacing: 0.18em;
+                font-size: clamp(12px, 1.3vw, 18px);
+            }
+            .status[hidden] {
+                display: none;
+            }
+            footer {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                color: var(--muted);
+                font-size: clamp(9px, 0.8vw, 12px);
+                letter-spacing: 0.08em;
+                opacity: 0.78;
+            }
+            footer strong {
+                color: var(--ink);
+                font-weight: 700;
+            }
+            @media (max-width: 700px) {
+                .shell {
+                    width: 100vw;
+                    gap: 8px;
+                }
+                .frame {
+                    border-inline: 0;
+                }
+                footer {
+                    padding-inline: 10px;
+                }
+                footer span:last-child {
+                    text-align: right;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="shell">
+            <section class="frame" aria-label="Lunaland game">
+                <canvas id="game" width="1280" height="720"></canvas>
+                <div id="status" class="status" role="status">
+                    INITIALIZING WEBGPU
+                </div>
+            </section>
+            <footer>
+                <span>LUNAR LANDER IN WGSL</span>
+                <span
+                    ><strong>[← →]</strong> TURN ·
+                    <strong>[SPACE]</strong> FLOAT ·
+                    <strong>[ENTER]</strong> CHOOSE ·
+                    <strong>[ESC]</strong> RETURN</span
+                >
+            </footer>
+        </main>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
